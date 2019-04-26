@@ -99,8 +99,6 @@ public class Http {
 	                result.append(line);
 	            }
 
-
-
 	            int statusCode = response.getStatusLine().getStatusCode();
 	            String reasonPhrase = response.getStatusLine().getReasonPhrase();
 	            String content = result.toString();

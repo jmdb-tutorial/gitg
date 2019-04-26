@@ -11,6 +11,7 @@ public class TagValidatorController {
 	@RequestMapping("/tagvalidator")
     public ResponseEntity<String> tagvalidator() {
     
-        return ResponseEntity.ok("Tag contains a secure URL");
+        return ResponseEntity.ok(HttpsChecker.check());
     }
+	
 }
