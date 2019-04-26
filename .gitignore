@@ -3,6 +3,10 @@ lib
 build
 out
 
+.classpath
+.project
+.settings
+
 .gradle
 .DS_STORE
 build/
