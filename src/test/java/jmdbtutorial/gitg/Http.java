@@ -79,4 +79,46 @@ public class Http {
             this.original = original;
         }
     }
+
+	public static Response POST(String url) {
+		 try {
+	            System.out.println("GET " + url + " HTTP/1.1");
+	            HttpClient client = HttpClientBuilder.create().build();
+	            HttpGet request = new HttpGet(url);
+
+	            HttpResponse response = client.execute(request);
+
+	            BufferedReader rd = new BufferedReader(
+	                    new InputStreamReader(response.getEntity().getContent()));
+
+	            StringBuffer result = new StringBuffer();
+	            String line;
+	            while ((line = rd.readLine()) != null) {
+	                result.append(line);
+	            }
+
+
+
+	            int statusCode = response.getStatusLine().getStatusCode();
+	            String reasonPhrase = response.getStatusLine().getReasonPhrase();
+	            String content = result.toString();
+
+	            System.out.println("HTTP/1.1 " + statusCode + " " + reasonPhrase);
+
+
+	            if (response.getEntity().getContentType().getValue().contains("application/json")) {
+	                System.out.println(prettyPrintJson(content));
+	            } else {
+	                System.out.println(content);
+	            }
+
+	            return new Response(statusCode,
+	                    reasonPhrase,
+	                    content,
+	                    response);
+
+	        } catch (Exception e) {
+	            throw new RuntimeException(e);
+	        }		
+	}
 }
