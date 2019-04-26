@@ -19,7 +19,16 @@ public class HttpsCheckerTest {
 		assertEquals("Tag contains a secure URL", HttpsChecker.check());
 	}
 	
-
+	@Test
+	public void should_return_a_secure_message_when_URL_contains_HTTPS() {
+		String tag = "https";
+		assertEquals("Tag contains a secure URL", HttpsChecker.check(tag));
+	}
 	
+	@Test
+	public void should_return_an_unsecure_message_when_URL_does_not_contain_HTTPS() {
+		String tag = "bob is foo";
+		assertEquals("Tag does not contain a secure URL", HttpsChecker.check(tag));
+	}
 
 }
