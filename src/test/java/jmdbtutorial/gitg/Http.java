@@ -1,5 +1,6 @@
 package jmdbtutorial.gitg;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -33,12 +34,32 @@ public class Http {
             String content = result.toString();
 
             System.out.println("HTTP/1.1 " + statusCode + " " + reasonPhrase);
-            System.out.println(content);
+
+
+            if (response.getEntity().getContentType().getValue().contains("application/json")) {
+                System.out.println(prettyPrintJson(content));
+            } else {
+                System.out.println(content);
+            }
 
             return new Response(statusCode,
                     reasonPhrase,
                     content,
                     response);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static String prettyPrintJson(String content) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            Object json = mapper.readValue(content, Object.class);
+
+            String indented = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+
+            return indented;
 
         } catch (Exception e) {
             throw new RuntimeException(e);
