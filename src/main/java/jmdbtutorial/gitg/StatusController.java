@@ -12,10 +12,10 @@ public class StatusController {
 
     @RequestMapping("/status")
     public ResponseEntity<Map> status() {
-        Map<String, String> statusJson = new HashMap<>();
+        Map<String, String> status = new HashMap<>();
 
-        statusJson.put("status", "up");
+        status.put("status", "up");
 
-        return ResponseEntity.ok(statusJson);
+        return ResponseEntity.ok(status);
     }
 }
