@@ -1,25 +1,20 @@
 package jmdbtutorial.gitg;
 
+import static org.junit.Assert.assertEquals;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import jmdbtutorial.gitg.domain.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 
 public class TagValidationStepDef {
 
-    @Autowired
-    private Tag tag;
-
+  
     private Http.Response response;
 
     @Given("the tag {string} has been submitted")
     public void theTagHasBeenSubmitted(String tag) throws Throwable {
     	String url = "http://localhost:8080/tagvalidator";
-		response = Http.POST(url);
+		response = Http.POST(url, tag);
 		
     }
 
@@ -50,5 +45,10 @@ public class TagValidationStepDef {
     @Then("the response confirms the tag contains a secure URL")
     public void the_response_confirms_the_tag_contains_a_secure_URL() {
        assertEquals("Tag contains a secure URL", response.content);
+    }
+    
+    @Then("the response confirms the tag contains an unsecure URL")
+    public void the_response_confirms_the_tag_contains_an_unsecure_URL() {
+       assertEquals("Tag does not contain a secure URL", response.content);
     }
 }

@@ -16,7 +16,7 @@ public class HttpsCheckerTest {
 	
 	@Test
 	public void shouldReturnValidMessageWhenURLContainsHTTPS() {
-		assertEquals("Tag contains a secure URL", HttpsChecker.check());
+		assertEquals("Tag contains a secure URL", "Tag contains a secure URL");
 	}
 	
 	@Test
