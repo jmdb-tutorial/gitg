@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         strict = true,
         monochrome = true,
-        plugin = "junit:/tmp/output",
+        plugin = {"pretty", "html:target/cucumber-html-reports", "junit:/tmp/output", "json:target/cucumber-html-reports/cucumber.json"},
         snippets = SnippetType.CAMELCASE
 )
 public class RunCukesTest {
