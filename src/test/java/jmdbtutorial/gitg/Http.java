@@ -1,13 +1,15 @@
 package jmdbtutorial.gitg;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Http {
     public static Response GET(String url) {
@@ -82,9 +84,9 @@ public class Http {
 
 	public static Response POST(String url) {
 		 try {
-	            System.out.println("GET " + url + " HTTP/1.1");
+	            System.out.println("POST " + url + " HTTP/1.1");
 	            HttpClient client = HttpClientBuilder.create().build();
-	            HttpGet request = new HttpGet(url);
+	            HttpPost request = new HttpPost(url);
 
 	            HttpResponse response = client.execute(request);
 
